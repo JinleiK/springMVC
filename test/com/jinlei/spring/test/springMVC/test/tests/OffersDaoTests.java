@@ -52,6 +52,7 @@ public class OffersDaoTests {
 	@Before
 	public void init() {
 		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
+		jdbc.execute("delete from messages");
 		jdbc.execute("delete from offer");
 		jdbc.execute("delete from users");
 	}

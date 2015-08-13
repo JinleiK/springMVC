@@ -4,7 +4,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<view-state id="showcontactform">
+	<var name="message" class="com.jinlei.spring.test.springMVC.dao.Message"></var>
+	<view-state id="showcontactform" model="message">
+	<on-entry>
+	<set name="requestScope.fromUser" value="usersService.getUser(currentUser?.name)"></set>
+	<set name="flowScope.fromName" value="fromUser?.name"></set>
+	<set name="message.user.username" value="requestParameters.uid"></set>
+	</on-entry>
+		<transition on="send" to="sendMessage"></transition>
 	</view-state>
+
+	<action-state id="sendMessage">
+		<evaluate expression="usersService.sendMessage(message)"></evaluate>
+		<transition to="messageSent"></transition>
+	</action-state>
+
+	<view-state id="messageSent"></view-state>
 
 </flow>

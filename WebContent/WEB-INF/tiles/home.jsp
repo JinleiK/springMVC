@@ -24,7 +24,7 @@ hello world
 	<c:forEach var="offer" items="${offers }">
 		<tr>
 			<td><c:out value="${offer.user.name }"></c:out></td>
-			<td><c:out value="${offer.email }"></c:out></td>
+			<td><a href="<c:url value='/message?uid=${offer.user.username }' />">Contact</a></td>
 			<td><c:out value="${offer.text }"></c:out></td>
 		</tr>
 	</c:forEach>

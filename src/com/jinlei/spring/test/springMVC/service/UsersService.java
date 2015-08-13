@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
+import com.jinlei.spring.test.springMVC.dao.Message;
+import com.jinlei.spring.test.springMVC.dao.MessagesDAO;
 import com.jinlei.spring.test.springMVC.dao.User;
 import com.jinlei.spring.test.springMVC.dao.UsersDAO;
 
@@ -16,11 +18,12 @@ public class UsersService {
 	private UsersDAO usersDao;
 	
 	@Autowired
+	private MessagesDAO messagesDao;
+	
+	@Autowired
 	public void setUsersDao(UsersDAO usersDao) {
 		this.usersDao = usersDao;
 	}
-
-
 
 	public void create(User user) {
 		// TODO Auto-generated method stub
@@ -40,6 +43,13 @@ public class UsersService {
 		// TODO Auto-generated method stub
 		return usersDao.getAll();
 	}
+	
+	public User getUser(String username) {
+		return usersDao.getUser(username);
+	}
 
-
+	
+	public void sendMessage(Message message) {
+		messagesDao.createOrUpdate(message);
+	}
 }

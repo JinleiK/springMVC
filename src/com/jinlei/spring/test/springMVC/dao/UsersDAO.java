@@ -59,11 +59,7 @@ public class UsersDAO {
 	}
 
 	public boolean exists(String username) {
-		Criteria crt = session().createCriteria(User.class);
-		//crt.add(Restrictions.eq("username", username));
-		crt.add(Restrictions.idEq(username));
-		User user = (User) crt.uniqueResult();
-		return user != null;
+		return getUser(username) != null;
 //		return jdbc.queryForObject(
 //				"select count(*) from users where username=:username",
 //				new MapSqlParameterSource("username", username), Integer.class) > 0;
@@ -75,6 +71,13 @@ public class UsersDAO {
 //		return jdbc
 //				.query("select * from users",
 //						BeanPropertyRowMapper.newInstance(User.class));
+	}
+
+	public User getUser(String username) {
+		Criteria crt = session().createCriteria(User.class);
+		//crt.add(Restrictions.eq("username", username));
+		crt.add(Restrictions.idEq(username));
+		return (User) crt.uniqueResult();
 	}
 
 }

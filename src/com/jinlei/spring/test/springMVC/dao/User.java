@@ -1,5 +1,7 @@
 package com.jinlei.spring.test.springMVC.dao;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,8 +13,13 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4593675691148946790L;
+
 	@NotBlank(groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Size(min=4, max=15, groups={PersistenceValidationGroup.class, FormValidationGroup.class})
 	@Pattern(regexp="^\\w{4,}$", message="only numbers, letters", groups={PersistenceValidationGroup.class, FormValidationGroup.class})

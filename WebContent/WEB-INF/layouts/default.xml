@@ -77,4 +77,9 @@
 		<put-attribute name="title" value="Send message"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/contact.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="messageSent" extends="offer.base">
+		<put-attribute name="title" value="Message sent"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/messagesent.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
