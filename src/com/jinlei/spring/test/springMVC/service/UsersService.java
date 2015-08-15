@@ -52,4 +52,9 @@ public class UsersService {
 	public void sendMessage(Message message) {
 		messagesDao.createOrUpdate(message);
 	}
+
+	public List<Message> getMessages(String username) {
+		
+		return messagesDao.getMessages(username);
+	}
 }

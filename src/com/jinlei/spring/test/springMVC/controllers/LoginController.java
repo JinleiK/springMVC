@@ -1,19 +1,24 @@
 package com.jinlei.spring.test.springMVC.controllers;
 
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.validation.Valid;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinlei.spring.test.springMVC.dao.FormValidationGroup;
+import com.jinlei.spring.test.springMVC.dao.Message;
 import com.jinlei.spring.test.springMVC.dao.User;
 import com.jinlei.spring.test.springMVC.service.UsersService;
 
@@ -98,5 +103,40 @@ public class LoginController {
 	public String showLoggedOut(Model model) {
 		//model.addAttribute("user", new User());
 		return "loggedout";
+	}
+	
+	@RequestMapping(value="/getmessages", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public Map<String, Object> getMessages(Principal principal) {
+		List<Message> messages = null;
+		if(principal == null) {
+			messages = new ArrayList<Message>();
+		} else {
+			String username = principal.getName();
+			messages = usersService.getMessages(username);
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("messages", messages);
+		data.put("number", messages.size());
+		return data;
+	}
+	
+	@RequestMapping("/messages")
+	public String showMessages() {
+		return "messages";
+	}
+	
+	@RequestMapping(value="/sendmessage", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public Map<String, Object> sendMessage(Principal principal, @RequestBody Map<String, Object> data) {
+		String text = (String) data.get("text");
+		String name = (String) data.get("name");
+		String email = (String) data.get("email");
+		
+		System.out.println(text + "," + name + "," + email);
+		
+		Map<String, Object> rval = new HashMap<String, Object>();
+		rval.put("success", true);
+		return rval;
 	}
 }

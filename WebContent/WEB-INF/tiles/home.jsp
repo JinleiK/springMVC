@@ -12,14 +12,16 @@ hello world
 <%-- <p>Request(using EL):${name}</p>
 
 <p><c:out value="${name }"></c:out></p> --%>
+
+
 <table class="offers">
 	<tr>
 		<td>Name
-		<td>
+		</td>
 		<td>Email
-		<td>
+		</td>
 		<td>Offer
-		<td>
+		</td>
 	</tr>
 	<c:forEach var="offer" items="${offers }">
 		<tr>
@@ -30,22 +32,6 @@ hello world
 	</c:forEach>
 </table>
 
-
-
-<c:choose>
-	<c:when test="${hasOffer }">
-		<p>
-			<a href="${pageContext.request.contextPath}/createoffer">Edit ur
-				current offer</a>
-		</p>
-	</c:when>
-	<c:otherwise>
-		<p>
-			<a href="${pageContext.request.contextPath}/createoffer">create
-				offer</a>
-		</p>
-	</c:otherwise>
-</c:choose>
 <%-- <p><a href="${pageContext.request.contextPath}/createoffer">create offer</a></p> --%>
 
 <%-- <sec:authorize access="!isAuthenticated()">
@@ -59,10 +45,4 @@ hello world
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </sec:authorize> --%>
-
-<sec:authorize access="hasRole('ADMIN')">
-	<p>
-		<a href="<c:url value='/admin'/>">admin</a>
-	</p>
-</sec:authorize>
 

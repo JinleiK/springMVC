@@ -8,6 +8,7 @@
 		<put-attribute name="includes" value=""></put-attribute>
 		<put-attribute name="title" value="Offers Home"></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp"></put-attribute>
+		<put-attribute name="toolbar" value="/WEB-INF/tiles/toolbar.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"></put-attribute>
 	</definition>
@@ -15,11 +16,6 @@
 	<definition name="home" extends="offer.base">
 		<put-attribute name="title" value="Offers Home"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/home.jsp"></put-attribute>
-	</definition>
-	
-	<definition name="offers" extends="offer.base">
-		<put-attribute name="title" value="Current offers"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/tiles/offers.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="login" extends="offer.base">
@@ -81,5 +77,10 @@
 	<definition name="messageSent" extends="offer.base">
 		<put-attribute name="title" value="Message sent"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/messagesent.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="messages" extends="offer.base">
+		<put-attribute name="title" value="Show messages"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/tiles/messages.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

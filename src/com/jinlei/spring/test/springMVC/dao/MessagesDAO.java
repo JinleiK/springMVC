@@ -37,7 +37,8 @@ public class MessagesDAO {
 	@SuppressWarnings("unchecked")
 	public List<Message> getMessages(String username) {
 		Criteria ctr = session().createCriteria(Message.class);
-		ctr.add(Restrictions.eq("username", username));
+		ctr.createAlias("user", "u");
+		ctr.add(Restrictions.eq("u.username", username));
 		return ctr.list();
 	}
 

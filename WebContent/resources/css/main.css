@@ -1,10 +1,14 @@
 @CHARSET "US-ASCII";
 
 
-.formtable {
-	width: 400px;
+.formtable, .offers {
 	padding: 10px;
 	border: 1px solid blue;
+	text-align: left;
+}
+
+table.offers td {
+	border-bottom: 1px dashed brown;
 }
 
 input[type=text], input[type=password] {
@@ -44,6 +48,11 @@ div.header {
 	height: 40px; 
 }
 
+div.toolbar {
+	position: relative;
+	padding: 10px;
+}
+
 div.content {
 	position: relative;
 	padding: 20px;
@@ -69,4 +78,36 @@ a.title {
 
 .offers {
 	border: 1px solid blue;
+}
+
+div.message {
+	margin-bottom: 20px;
+}
+
+span.subject {
+	position: relative;
+	margin: 10px;
+	color: brown;
+	font-size: large;
+}
+
+span.messageContent {
+	display: block;
+	margin: 10px;
+}
+
+span.name {
+	position: relative;
+	margin: 10px;
+	font-style:italic;
+	border-bottom: 1px dashed brown;
+}
+
+form.replyForm {
+	padding: 10px;
+	/* display: none;
+ */}
+
+textarea.replyArea {
+	height: 50px;
 }
