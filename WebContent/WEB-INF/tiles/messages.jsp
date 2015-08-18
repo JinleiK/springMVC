@@ -17,11 +17,13 @@ var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 var csrfToken = $("meta[name='_csrf']").attr("content");
 
 function success(data) {
-	alert("success");
+	$("#replyForm" + data.target).toggle();
+	$("#feedback" + data.target).text("Message sent");
+	startTimer();
 }
 
 function error(data) {
-	alert("error");
+	alert("Error send message!");
 }
 
 function sendmessage(i, name, email) {
@@ -32,7 +34,7 @@ function sendmessage(i, name, email) {
 		"type": 'POST',
 		"url": '<c:url value="/sendmessage" />',
 		"headers": headers,
-		"data": JSON.stringify({"text": text, "name": name, "email": email}),
+		"data": JSON.stringify({"target": i, "text": text, "name": name, "email": email}),
 		"success": success,
 		"error": error,
 		contentType: "application/json",
@@ -58,11 +60,16 @@ function showMessages(data) {
 		contentSpan.appendChild(document.createTextNode(message.content));
 		
 		var nameSpan = document.createElement("span");
-		nameSpan.setAttribute("class", "name")
+		nameSpan.setAttribute("class", "name");
 		nameSpan.appendChild(document.createTextNode(message.name + " (" + message.email + ")"));
+		
+		var feedbackSpan = document.createElement("span");
+		feedbackSpan.setAttribute("class", "feedback");
+		feedbackSpan.setAttribute("id", "feedback" + i);
 		
 		var replyForm = document.createElement("form");
 		replyForm.setAttribute("class", "replyForm");
+		replyForm.setAttribute("id", "replyForm" + i);
 		var textArea = document.createElement("textArea");
 		textArea.setAttribute("class", "replyArea");
 		textArea.setAttribute("id", "replyContent" + i);
@@ -82,6 +89,7 @@ function showMessages(data) {
 		messageDiv.appendChild(subjectSpan);
 		messageDiv.appendChild(contentSpan);
 		messageDiv.appendChild(nameSpan);
+		messageDiv.appendChild(feedbackSpan);
 		messageDiv.appendChild(replyForm);
 		
 		$("#showMessages").append(messageDiv);

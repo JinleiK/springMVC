@@ -34,6 +34,8 @@
 		</property>
 	</bean>
 	
+	
+	
 	<!-- FOR WEBFLOW -->
 	<webflow-config:flow-registry id="flowRegistry"
 		base-path="/WEB-INF/flows"
@@ -66,5 +68,22 @@
 	
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	</bean>
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="Provide your Gmail ID" />
+		<property name="password" value="Provide your Gmail Password" />
+ 
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
 	</bean>
 </beans>

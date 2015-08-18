@@ -111,3 +111,7 @@ form.replyForm {
 textarea.replyArea {
 	height: 50px;
 }
+
+span.feedback {
+	color: green;
+}

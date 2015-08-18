@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,9 @@ public class LoginController {
 	
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private MailSender mailSender;
 	
 	public UsersService getUsersService() {
 		return usersService;
@@ -133,10 +138,25 @@ public class LoginController {
 		String text = (String) data.get("text");
 		String name = (String) data.get("name");
 		String email = (String) data.get("email");
+		Integer target = (Integer) data.get("target");
 		
 		System.out.println(text + "," + name + "," + email);
 		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setFrom("idiotcallie@gmail.com");
+		mail.setTo(email);
+		mail.setSubject("Re: " + name);
+		mail.setText(text);
+		
+		try {
+			mailSender.send(mail);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("can't send message");
+		}
+		
 		Map<String, Object> rval = new HashMap<String, Object>();
+		rval.put("target", target);
 		rval.put("success", true);
 		return rval;
 	}
