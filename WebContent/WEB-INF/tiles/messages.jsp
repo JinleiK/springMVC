@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-	
+
+<sec:csrfMetaTags />	
 	
 <div id="showMessages"></div>
 
@@ -11,6 +12,9 @@
 <script type="text/javascript">
 
 var timer;
+var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+var csrfToken = $("meta[name='_csrf']").attr("content");
 
 function success(data) {
 	alert("success");
@@ -20,11 +24,14 @@ function error(data) {
 	alert("error");
 }
 
-function sendReply(i, name, email) {
+function sendmessage(i, name, email) {
 	var text = $("#replyContent" + i).val();
+	var headers = {};
+    headers[csrfHeader] = csrfToken;
 	$.ajax({
 		"type": 'POST',
 		"url": '<c:url value="/sendmessage" />',
+		"headers": headers,
 		"data": JSON.stringify({"text": text, "name": name, "email": email}),
 		"success": success,
 		"error": error,
@@ -65,7 +72,7 @@ function showMessages(data) {
 		replyButton.setAttribute("value", "reply");
 		replyButton.onclick = function(j, name, email) {
 			return function() {
-				sendReply(j, name, message.email);
+				sendmessage(j, name, message.email);
 			}
 		}(i, message.name, message.email);
 		/* replyButton.setAttribute("class", "replybutton"); */

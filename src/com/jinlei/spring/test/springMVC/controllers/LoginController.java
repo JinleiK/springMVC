@@ -126,7 +126,8 @@ public class LoginController {
 		return "messages";
 	}
 	
-	@RequestMapping(value="/sendmessage", method=RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/sendmessage", method=RequestMethod.POST, headers =
+		{"Content-type=application/json"}, produces="application/json")
 	@ResponseBody
 	public Map<String, Object> sendMessage(Principal principal, @RequestBody Map<String, Object> data) {
 		String text = (String) data.get("text");
