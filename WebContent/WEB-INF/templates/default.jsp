@@ -15,6 +15,8 @@
 <tiles:insertAttribute name="includes"></tiles:insertAttribute>
 </head>
 <body>
+<script src="https://code.angularjs.org/1.4.4/angular.js"></script>
+
 <div class="header">
 <tiles:insertAttribute name="header"></tiles:insertAttribute>
 </div>

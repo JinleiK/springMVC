@@ -83,4 +83,6 @@
 		<put-attribute name="title" value="Show messages"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/tiles/messages.jsp"></put-attribute>
 	</definition>
+
+	
 </tiles-definitions>

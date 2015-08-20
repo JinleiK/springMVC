@@ -1,7 +1,10 @@
 package com.jinlei.spring.test.springMVC.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -13,9 +16,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinlei.spring.test.springMVC.dao.FormValidationGroup;
+import com.jinlei.spring.test.springMVC.dao.Message;
 import com.jinlei.spring.test.springMVC.dao.Offer;
+import com.jinlei.spring.test.springMVC.dao.OffersDAO;
 import com.jinlei.spring.test.springMVC.service.OffersService;
 
 @Controller
@@ -103,7 +109,19 @@ public class OffersController {
 			offerService.delete(offer.getId());
 			return "offerdeleted";
 		}
-
+	}
+	
+	@RequestMapping(value="/allOffers", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public Map<String, Object> allOffers(Principal principal) {
+		List<Offer> offers = offerService.getCurrent();
 		
+		Map<String, Object> data = new HashMap<String, Object>();
+		int i = 0;
+		for(Offer offer : offers){
+			data.put("offer" + (i ++), offer);
+		}
+		
+		return data;
 	}
 }

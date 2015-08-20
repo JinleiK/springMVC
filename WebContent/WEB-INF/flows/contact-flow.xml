@@ -5,12 +5,13 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<var name="message" class="com.jinlei.spring.test.springMVC.dao.Message"></var>
+
 	<view-state id="showcontactform" model="message">
-	<on-entry>
-	<set name="requestScope.fromUser" value="usersService.getUser(currentUser?.name)"></set>
-	<set name="flowScope.fromName" value="fromUser?.name"></set>
-	<set name="message.user.username" value="requestParameters.uid"></set>
-	</on-entry>
+		<on-entry>
+			<set name="requestScope.fromUser" value="usersService.getUser(currentUser?.name)"></set>
+			<set name="flowScope.fromName" value="fromUser?.name"></set>
+			<set name="message.user.username" value="requestParameters.uid"></set>
+		</on-entry>
 		<transition on="send" to="sendMessage"></transition>
 	</view-state>
 
