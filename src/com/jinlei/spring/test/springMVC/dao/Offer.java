@@ -34,6 +34,7 @@ public class Offer {
 	@Column(name = "text")
 	private String text;
 
+	
 	public Offer() {
 		this.user = new User();
 	}
@@ -88,11 +89,19 @@ public class Offer {
 		return user.getUsername();
 	}
 
+	
+	@Override
+	public String toString() {
+		return "Offer [id=" + id + ", user=" + user + ", email=" + email
+				+ ", text=" + text + ", attachPath=" + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
@@ -112,6 +121,8 @@ public class Offer {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (id != other.id)
+			return false;
 		if (text == null) {
 			if (other.text != null)
 				return false;
@@ -125,10 +136,5 @@ public class Offer {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Offer [id=" + id + ", user=" + user + ", email=" + email
-				+ ", text=" + text + "]";
-	}
 
 }

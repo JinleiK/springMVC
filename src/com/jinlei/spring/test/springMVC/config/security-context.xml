@@ -44,6 +44,7 @@
 		<security:intercept-url pattern="/loggedout" access="permitAll" />
 		
 		<security:intercept-url pattern="/allOffers" access="permitAll" />
+		<security:intercept-url pattern="/addOffer" access="permitAll" />
 		
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
