@@ -83,10 +83,10 @@ public class OffersController {
 
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
 	public String doCreate(
+			Model model, 
 			@Validated(value = FormValidationGroup.class) Offer offer,
 			BindingResult result,
 			Principal principal,
-			@RequestParam(value = "attachment", required = false) MultipartFile attachment,
 			@RequestParam(value = "delete", required = false) String delete) {
 		if (result.hasErrors()) {
 			// System.out.println("form does not validate.");

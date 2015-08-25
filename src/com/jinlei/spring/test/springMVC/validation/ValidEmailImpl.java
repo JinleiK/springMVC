@@ -18,6 +18,7 @@ public class ValidEmailImpl implements ConstraintValidator<ValidEmail, String> {
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
 		// TODO Auto-generated method stub
+		System.out.println(email);
 		if(email.length() < min)
 			return false;
 		if(!EmailValidator.getInstance(false).isValid(email))

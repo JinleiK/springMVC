@@ -17,7 +17,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jinlei.spring.test.springMVC.dao.FormValidationGroup;
 import com.jinlei.spring.test.springMVC.dao.Message;
@@ -160,5 +162,25 @@ public class LoginController {
 		rval.put("target", target);
 		rval.put("success", true);
 		return rval;
+	}
+	
+	@RequestMapping(value="/uploadfile")
+	public String uploadPersonalFile(Model model) {
+		return "uploadfile";
+	}
+	
+	@RequestMapping(value="/upload", method=RequestMethod.POST)
+	public String uploadFile(Model model, Principal principal, 
+			@RequestParam(value = "attachment", required = false) MultipartFile attachment) {
+		//save file
+		try {
+			if(!attachment.isEmpty()){
+				Utils.saveFile(principal.getName(), attachment);
+			}
+		} catch (Exception e) {
+			//result.reject(e.getMessage());
+			return "createoffer";
+		}
+		return "fileuploaded";
 	}
 }

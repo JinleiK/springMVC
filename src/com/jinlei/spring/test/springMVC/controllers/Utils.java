@@ -22,5 +22,22 @@ public class Utils {
 			throw new IOException("unable to upload file", e);
 		}
 	}
+	
+	public static void saveFile(String username, MultipartFile attachment) throws IOException {
+		try {
+			String fileType = attachment.getContentType();
+			System.out.println(attachment.getOriginalFilename());
+			System.out.println(fileType);
+			File file = new File("/offers/static/uploadFiles/userAttaches/" + attachment.getOriginalFilename());
+			byte[] bytes = attachment.getBytes();
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(file));
+            stream.write(bytes);
+            stream.close();
+		} catch (Exception e) {
+			throw new IOException("unable to upload file", e);
+		}
+	}
+
 
 }

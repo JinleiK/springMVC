@@ -33,6 +33,9 @@
 		<security:intercept-url pattern="/sendmessage" access="isAuthenticated()" />
 		<security:intercept-url pattern="/getmessages" access="isAuthenticated()" />
 		<security:intercept-url pattern="/messages" access="isAuthenticated()" />
+		<security:intercept-url pattern="/uploadfile" access="isAuthenticated()" />
+		<security:intercept-url pattern="/upload" access="isAuthenticated()" />
+		<security:intercept-url pattern="/fileuploaded" access="isAuthenticated()" />
 		<security:intercept-url pattern="/message" access="permitAll" />
 		<security:intercept-url pattern="/newaccount" access="permitAll" />
 		<security:intercept-url pattern="/createaccount" access="permitAll" />
